@@ -20,10 +20,13 @@ public class EnterService {
                 .enterId("starShip")
                 .enterName("스타쉽")
                 .build();
+
         Entertainment YG = Entertainment.builder()
                 .enterId("YG")
                 .enterName("와이지")
                 .build();
+
+
         GirlGroup ive = GirlGroup.builder()
                 .groupId("ive")
                 .groupName("아이브")
@@ -34,7 +37,7 @@ public class EnterService {
                 .groupName("블랙핑크")
                 .entertainment(YG)
                 .build();
-        //ㅎ개ㅕㅔtodtjd
+
         IdolMember ahn = IdolMember.builder()
                 .id("안유진")
                 .name("유진")
@@ -45,31 +48,33 @@ public class EnterService {
                 .name("원영")
                 .girlGroup(ive)
                 .build();
-        IdolMember jeni= IdolMember.builder()
-                .id("제니")
-                .name("쩨니")
-                .girlGroup(black)
-                .build();
-        IdolMember jisu= IdolMember.builder()
-                .id("지수")
-                .name("찌")
-                .girlGroup(black)
-                .build();
-        //idol생성
 
-        //enter에 group list 등록
+        IdolMember jeni = IdolMember.builder()
+                .id("제니")
+                .name("째니")
+                .girlGroup(black)
+                .build();
+        IdolMember jisu = IdolMember.builder()
+                .id("지수")
+                .name("지수다")
+                .girlGroup(black)
+                .build();
+
+        // Enter에 Group List 등록
         startship.getGroups().add(ive);
-       YG.getGroups().add(black);
-        //group에 idol list 등록
+        YG.getGroups().add(black);
+
+        // Group에 Idol List 등록
+
         ive.getMembers().add(ahn);
         ive.getMembers().add(jang);
         black.getMembers().add(jeni);
         black.getMembers().add(jisu);
 
+        // starShip 저장
+        em.persist(startship);
 
-
-        //starship 저장
-
-        //yg
+        // YG 저장
+        em.persist(YG);
     }
 }
