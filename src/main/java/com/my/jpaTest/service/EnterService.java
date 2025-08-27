@@ -15,9 +15,9 @@ public class EnterService {
     EntityManager em;
 
     public void initData() {
-        // Enter 생성
+        //enter생성
         Entertainment startship = Entertainment.builder()
-                .enterId("starship")
+                .enterId("starShip")
                 .enterName("스타쉽")
                 .build();
 
@@ -26,20 +26,18 @@ public class EnterService {
                 .enterName("와이지")
                 .build();
 
-        // Group 생성, 엔터 등록
+
         GirlGroup ive = GirlGroup.builder()
                 .groupId("ive")
                 .groupName("아이브")
                 .entertainment(startship)
                 .build();
-
         GirlGroup black = GirlGroup.builder()
                 .groupId("blackPink")
                 .groupName("블랙핑크")
                 .entertainment(YG)
                 .build();
 
-        // Idol 생성, 그룹 등록
         IdolMember ahn = IdolMember.builder()
                 .id("안유진")
                 .name("유진")
@@ -67,6 +65,7 @@ public class EnterService {
         YG.getGroups().add(black);
 
         // Group에 Idol List 등록
+
         ive.getMembers().add(ahn);
         ive.getMembers().add(jang);
         black.getMembers().add(jeni);
