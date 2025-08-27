@@ -18,29 +18,31 @@ class EnterServiceTest {
     EnterService enterService;
 
     @Autowired
-    EntityManager entityManager;
+    EntityManager em;
 
     @Test
     @DisplayName("데이터 입력 테스트")
-    Void dataInputTest() {
+    void dataInputTest() {
         enterService.initData();
     }
 
+    // 1. 지수가 속한 걸그룹 이름과 엔터테인트 회사 이름 출력하기.
     @Test
     @DisplayName("문제 1")
     void 문제1() {
         IdolMember jisu = em.find(IdolMember.class, "지수");
-        String.groupName = jisu.getGirlGroup().getGroupName();
-        String.enterName = jisu.getGirlGroup().getEntertainment().getEnterName();
+        String groupName = jisu.getGirlGroup().getGroupName();
+        String enterName = jisu.getGirlGroup().getEntertainment().getEnterName();
+        System.out.println("Group : " + groupName + ", Enter : " + enterName);
     }
 
+    // 2. blackPink 멤버 리스트 출력하기.
     @Test
     @DisplayName("문제 2")
     void 문제2() {
         GirlGroup group = em.find(GirlGroup.class, "blackPink");
         group.getMembers().forEach(
-                IdolMember x -> System.out.println(x.getName())
+                x-> System.out.println(x.getName())
         );
-
     }
 }
