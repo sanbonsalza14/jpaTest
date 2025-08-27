@@ -17,7 +17,7 @@ public class Member {
     private String name;
 
     //팀 정보를 갖는 연관관계를 구성
-    @ManyToOne()
+    @ManyToOne
     @JoinColumn(name = "teamId")
     private Team team;
 }

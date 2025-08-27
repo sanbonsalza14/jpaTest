@@ -37,3 +37,16 @@ public class Users {
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 }
+
+//// src/main/java/com/my/jpaTest/repository/EntertainmentRepository.java
+//package com.my.jpaTest.repository;
+//
+//import com.my.jpaTest.entity.Entertainment;
+//import org.springframework.data.jpa.repository.JpaRepository;
+//
+//import java.util.Optional;
+//
+//public interface EntertainmentRepository extends JpaRepository<Entertainment, Long> {
+//    Optional<Entertainment> findByCode(String code);
+//    boolean existsByCode(String code);
+//}
