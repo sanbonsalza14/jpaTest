@@ -1,12 +1,14 @@
 package com.my.jpaTest.dto;
 
-import lombok.Getter;
-import lombok.Setter;
-import org.springframework.stereotype.Service;
+import lombok.Data;
 
-@Getter
-@Setter
+@Data
 public class Test {
-    private Long Id;
-    private String name;
+    private  Long id;
+    private  String name;
+    private  String email;
+
+    public void email() {
+        System.out.println("난 @Data");
+    }
 }
