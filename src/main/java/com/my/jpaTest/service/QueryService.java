@@ -19,16 +19,16 @@ import java.util.List;
 public class QueryService {
     @Autowired
     EntityManager em;
-    //이름이 이만기인 자료 검색
+    // 이름이 이만기인 자료 검색
     public List<Member> dynamicQuery() {
-        String sql = "SELECT m from Member m WHERE m.memberId=:id";
+        String sql = "SELECT m FROM Member m WHERE m.memberId=:id";
         TypedQuery<Member> query = em.createQuery(sql, Member.class)
                 .setParameter("id", "lee");
         List<Member> members = query.getResultList();
         return members;
     }
 
-    //팀 전체 검색하기
+    // 팀 전체 검색하기
     public List<Team> findAllTeam() {
         String sql = "SELECT t FROM Team t";
         Query query = em.createQuery(sql);
@@ -36,38 +36,39 @@ public class QueryService {
         return teamList;
     }
 
-    //멤버 테이블 중에서 씨름팀에 속해있는 멤버의 이름만 풀력
+    // 멤버 테이블 중에서 씨름팀에 속해있는 멤버의 이름만 출력
     public List<Member> fineMemberSsirum() {
-        String sql = "SELECT m FROM MEMBER M" + "where M.teamName LIKE : teamname";
-        TypedQuery<Member> results = em.createQuery(sql, Member.class).setParameter("teamName","씨름%");
+        String sql = "SELECT m FROM Member m " +
+                "WHERE m.team.teamName LIKE :teamName";
+        TypedQuery<Member> results = em.createQuery(sql, Member.class)
+                .setParameter("teamName", "씨름%");
         return results.getResultList();
-
     }
 
-    //씨름팀 인원수 구하기
+    // 씨름팀 인원수 구하기
     public Long teamCount() {
         String sql = "SELECT COUNT(m) FROM Member m " +
-                "WHERE m.team.teamName LIKE : teamName";
+                "WHERE m.team.teamName LIKE :teamName";
         Query query = em.createQuery(sql)
-                .setParameter("teamName ", "씨름%");
+                .setParameter("teamName", "씨름%");
         Long result = (Long) query.getSingleResult();
         return result;
     }
 
-    //MemberDTO로 결과 받기
+    // MemberDTO로 결과 받기
     public List<MemberDto> getMemberDto() {
         String sql = "SELECT NEW " +
-                "com.my.jpaTest.dto.MemberDto(m.name, m.team.teamName)" +
+                "com.my.jpaTest.dto.MemberDto(m.name, m.team.teamName) " +
                 "FROM Member m";
 
-        TypedQuery<MemberDto> query = em.createQuery((sql), MemberDto.class);
+        TypedQuery<MemberDto> query = em.createQuery(sql, MemberDto.class);
         return query.getResultList();
     }
 
     @Autowired
     MemberRepository memberRepository;
-    //projection을 이요해서 데이터 받아오기
+    // Projection을 이용해서 데이터 받아오기
     public List<MemberProjection> getProjection() {
-        return  memberRepository.findProjection();
+        return memberRepository.findProjection();
     }
 }
